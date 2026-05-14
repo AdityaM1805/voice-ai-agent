@@ -3,6 +3,7 @@ from sqlalchemy.orm import Session
 from app.config import settings
 from app.database import get_db
 from app.services.scheduling_service import find_available_slots 
+from app.agents.diagnostic_agent import generate_diagnostic_response
 
 #create FastAPI application instance
 app = FastAPI(
@@ -54,3 +55,23 @@ async def test_available_slots(
         }
         for slot in slots
     ]
+
+@app.post("/test/diagnostic-agent")
+async def test_diagnostic_agent(payload: dict):
+    """
+    Temporary endpoint to test the AI diagnostic agent
+    before connecting it to phone calls.
+    """
+
+    user_message = payload.get("message", "")
+
+    conversation_context = payload.get("context", {})
+
+    assistant_response = generate_diagnostic_response(
+        user_message=user_message,
+        conversation_context=conversation_context,
+    )
+
+    return {
+        "assistant_response": assistant_response
+    }
