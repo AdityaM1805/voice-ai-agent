@@ -54,7 +54,8 @@ class Appointment(Base):
     technician_id = Column(Integer, ForeignKey("technicians.id"), nullable=False)
     customer_name = Column(String, nullable=False)
     customer_phone = Column(String, nullable=False)
-    customer_email = Column(String, nullable=False)
+    zip_code = Column(String, nullable=False)
+    customer_email = Column(String, nullable=True)
     appliance_type = Column(String, nullable=False)
     symptom_summary = Column(String, nullable=False)
     availability_slot_id = Column(Integer, ForeignKey("availability_slots.id"), nullable=False)
@@ -71,7 +72,9 @@ class CallSession(Base):
     appliance_type = Column(String, nullable=True)
     symptoms = Column(Text, nullable=True)
     zip_code = Column(String, nullable=True)
+    pending_slot_id = Column(Integer, nullable=True)
     troubleshooting_steps = Column(Text, nullable=True)
     created_at = Column(DateTime, default=datetime.utcnow)
     updated_at = Column(DateTime, default=datetime.utcnow)
+    
       
