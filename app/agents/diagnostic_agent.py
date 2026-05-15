@@ -173,6 +173,9 @@ Example:
     content = response.choices[0].message.content
 
     try:
-        return json.loads(content)
+        parsed_content = json.loads(content)
+        if not isinstance(parsed_content, dict):
+            return {}
+        return parsed_content
     except Exception:
         return {}

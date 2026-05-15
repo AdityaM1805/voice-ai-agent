@@ -73,6 +73,7 @@ class CallSession(Base):
     symptoms = Column(Text, nullable=True)
     zip_code = Column(String, nullable=True)
     pending_slot_id = Column(Integer, nullable=True)
+    stage = Column(String, nullable=True, default="collect_issue")  # e.g. initial, info_gathering, slot_selection, confirmation
     troubleshooting_steps = Column(Text, nullable=True)
     created_at = Column(DateTime, default=datetime.utcnow)
     updated_at = Column(DateTime, default=datetime.utcnow)
